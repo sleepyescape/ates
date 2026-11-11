@@ -1,0 +1,69 @@
+name: Freefield Studio for Windows
+
+# Manual only: run it from the Actions tab (it publishes a public release with the built .exe files).
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  FREEFIELD_REPO: https://github.com/neuregex/freefield.git
+  FREEFIELD_REF: f3d32ce2e3128c58bb2fe38c8942edf87cdb2e4c
+  RELEASE_TAG: freefield-studio-v0.1.0
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Get Freefield at the pinned commit
+        shell: bash
+        run: |
+          git init ../freefield
+          cd ../freefield
+          git remote add origin "$FREEFIELD_REPO"
+          git fetch --depth 1 origin "$FREEFIELD_REF"
+          git checkout --quiet FETCH_HEAD
+          npm ci
+          npm test
+
+      - name: Build the installer and the portable exe
+        working-directory: freefield-desktop
+        shell: bash
+        run: |
+          npm ci
+          node scripts/stage.mjs ../../freefield
+          npx electron-builder --win --x64 --publish never
+
+      - name: Smoke test the packaged app
+        shell: pwsh
+        run: |
+          $out = Join-Path $env:RUNNER_TEMP 'smoke.json'
+          $p = Start-Process -FilePath 'freefield-desktop/dist/win-unpacked/Freefield Studio.exe' -ArgumentList "--smoke=$out" -PassThru -Wait
+          Get-Content $out
+          $r = Get-Content $out | ConvertFrom-Json
+          if ($p.ExitCode -ne 0 -or -not $r.ok -or $r.apps -lt 1) { throw "smoke test failed" }
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: FreefieldStudio-windows
+          path: freefield-desktop/dist/*.exe
+
+      - name: Publish the release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd freefield-desktop/dist
+          notes="Freefield Studio for Windows (x64): the studio of github.com/neuregex/freefield (commit ${FREEFIELD_REF:0:7}) with its server built in. Setup installs it; Portable runs without installing. Generation needs a Freefield GPU backend (Modal or your own ComfyUI), set in File > Backend settings."
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            gh release upload "$RELEASE_TAG" *.exe --clobber
+          else
+            gh release create "$RELEASE_TAG" *.exe --target "$GITHUB_SHA" --title "Freefield Studio for Windows 0.1.0" --notes "$notes"
+          fi

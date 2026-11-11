@@ -1,0 +1,36 @@
+{
+  "name": "freefield-desktop",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Windows desktop build of Freefield (github.com/neuregex/freefield): the studio and its local server in one app.",
+  "license": "MIT",
+  "scripts": {
+    "stage": "node scripts/stage.mjs",
+    "dist:win": "electron-builder --win --x64 --publish never"
+  },
+  "devDependencies": {
+    "electron": "37.2.0",
+    "electron-builder": "26.0.12",
+    "esbuild": "0.25.8"
+  },
+  "build": {
+    "appId": "io.github.neuregex.freefield.desktop",
+    "productName": "Freefield Studio",
+    "copyright": "Freefield by neuregex, MIT",
+    "directories": { "app": "stage", "output": "dist", "buildResources": "build" },
+    "asar": false,
+    "win": {
+      "target": [{ "target": "nsis", "arch": ["x64"] }, { "target": "portable", "arch": ["x64"] }],
+      "icon": "build/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "shortcutName": "Freefield Studio",
+      "artifactName": "FreefieldStudio-Setup-${version}.${ext}"
+    },
+    "portable": { "artifactName": "FreefieldStudio-Portable-${version}.${ext}" }
+  }
+}
