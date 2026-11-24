@@ -13,7 +13,7 @@ imgs = []
 N=len([f for f in os.listdir(f"{d}/out") if f.endswith(".png")])
 for i in range(1, N+1):
     jpg = f'{outdir}/slides/slide{i:02d}.jpg'
-    Image.open(f'{d}/out/slide{i:02d}.png').convert('RGB').resize((2560, 1440), Image.LANCZOS).save(jpg, quality=88, optimize=True, progressive=False)
+    Image.open(f'{d}/out/slide{i:02d}.png').convert('RGB').save(jpg, quality=93, subsampling=0)
     s = prs.slides.add_slide(prs.slide_layouts[6])
     s.shapes.add_picture(jpg, 0, 0, prs.slide_width, prs.slide_height)
     if i in NOTES:
