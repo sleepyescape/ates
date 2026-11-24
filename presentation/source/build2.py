@@ -1,4 +1,6 @@
-import sys, os
+import sys, os, re
+from pptx.dml.color import RGBColor
+from pptx.oxml.ns import qn
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from notes import NOTES
 from pptx import Presentation
@@ -16,9 +18,22 @@ for i in range(1, N+1):
     s.shapes.add_picture(jpg, 0, 0, prs.slide_width, prs.slide_height)
     if i in NOTES:
         tf = s.notes_slide.notes_text_frame
-        tf.text = NOTES[i]
-        for para in tf.paragraphs:
-            for r in para.runs: r.font.size = Pt(10)
+        tf.text = ""
+        for li, line in enumerate(NOTES[i].split("\n")):
+            para = tf.paragraphs[0] if li == 0 else tf.add_paragraph()
+            for part in re.split(r"(https?://\S+)", line):
+                if not part: continue
+                r = para.add_run(); r.text = part
+                f = r.font; f.size = Pt(11); f.name = "Times New Roman"
+                rPr = r._r.get_or_add_rPr()
+                for tag in ("a:ea", "a:cs"):
+                    el = rPr.find(qn(tag))
+                    if el is None:
+                        el = rPr.makeelement(qn(tag), {}); rPr.append(el)
+                    el.set("typeface", "Times New Roman")
+                if part.startswith("http"):
+                    r.hyperlink.address = part
+                    f.color.rgb = RGBColor(0x00, 0x00, 0xFF); f.underline = True
     imgs.append(Image.open(jpg))
 prs.save(f'{outdir}/Презентация_миграция_ВКС.pptx')
 imgs[0].save(f'{outdir}/Презентация_миграция_ВКС.pdf', save_all=True, append_images=imgs[1:], resolution=200)
