@@ -45,7 +45,7 @@ S={
 }
 EXTRA={"E1":"Eurostat. Persons subject to EU Blue Card decisions (набор данных migr_resbc11), Германия, 2013–2024. URL: https://ec.europa.eu/eurostat/databrowser/view/migr_resbc11/default/table?lang=en"}
 def L(items, calc=None, note=None):
-    out=["Источники к слайду (в скобках — номер сноски в тексте работы):"]
+    out=[]
     for it in items:
         if isinstance(it,str): out.append(f"• {EXTRA[it]} — источника нет в тексте работы, добавлен для графика динамики.")
         else:
