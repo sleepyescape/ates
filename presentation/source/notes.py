@@ -14,7 +14,7 @@ S={
 14:"USCIS. Employment-Based Immigration: First Preference EB-1. URL: https://www.uscis.gov/working-in-the-united-states/permanent-workers/employment-based-immigration-first-preference-eb-1",
 15:"Директива (ЕС) 2021/1883 (EUR-Lex, CELEX 32021L1883). URL: https://eur-lex.europa.eu/legal-content/en/TXT/?uri=CELEX%3A32021L1883",
 16:"Eurostat. Migration & asylum in Europe: migrant skills (данные за 2024 год). URL: https://ec.europa.eu/eurostat/en/web/products-eurostat-news/w/wdn-20260127-1",
-17:"European Commission. EU Immigration Portal: EU Blue Card — Germany. URL: https://home-affairs.ec.europa.eu/policies/migration-and-asylum/eu-immigration-portal/eu-blue-card/eu-blue-card-germany_en",
+17:"European Commission. EU Immigration Portal: EU Blue Card: Germany. URL: https://home-affairs.ec.europa.eu/policies/migration-and-asylum/eu-immigration-portal/eu-blue-card/eu-blue-card-germany_en",
 19:"Shanghai Municipal People's Government. Employment Eligibility and Work Permit. URL: https://english.shanghai.gov.cn/en-Individuals-Employment-EligibilityandWorkpermit/20260813/3b14d60fe3484535958e580a24720412.html",
 20:"Beijing Municipal Government. Policy toolkit: foreign talents, R visa. URL: https://english.beijing.gov.cn/government/policytoolkittwo/INV_Policy_Text/202411/t20241119_3945171.html",
 22:"UAE Government Portal. Golden visa. URL: https://u.ae/en/information-and-services/visa-and-emirates-id/residence-visas/golden-visa",
@@ -46,13 +46,11 @@ S={
 EXTRA={"E1":"Eurostat. Persons subject to EU Blue Card decisions (набор данных migr_resbc11), Германия, 2013–2024. URL: https://ec.europa.eu/eurostat/databrowser/view/migr_resbc11/default/table?lang=en"}
 def L(items, calc=None, note=None):
     out=[]
-    for it in items:
-        if isinstance(it,str): out.append(f"• {EXTRA[it]} — источника нет в тексте работы, добавлен для графика динамики.")
-        else:
-            ref=f"[{it}]" if it not in (53,55,56) else {53:"[53, 54]",55:"[55]",56:"[56]"}[it]
-            out.append(f"{ref} {S[it]}")
-    if calc: out+=["","Расчёты авторов:"]+["• "+c for c in calc]
-    if note: out+=["",note]
+    for it in sorted([x for x in items if not isinstance(x,str)]):
+        ref={53:"[53, 54]"}.get(it,f"[{it}]")
+        out.append(f"{ref} {S[it]}")
+    for it in [x for x in items if isinstance(x,str)]:
+        out.append(EXTRA[it])
     return "\n".join(out)
 NOTES={
 2:L([1,2,3,4,5,6,7,11],note="Определения brain drain, brain gain и brain waste — по глоссарию МОТ [6]; brain circulation — по ОЭСР [7]. Национальные критерии ВКС — примеры США [3], ЕС [4], России [5]."),
@@ -68,5 +66,4 @@ NOTES={
 12:L([46,47,30,48,49,50,51],note="Центр в Кембридже — [46]; партнёрство с Broad Institute и 3 препарата — [30], [47]; ≈ 15 тыс. учёных и 6,035 млрд € на R&D — [48]; Huawei: сотрудники и доля R&D — [50], расходы на R&D, доля выручки и патенты — [51]."),
 13:L([53,57],note="+9–18% и «в 2 раза чаще» — Хант и Готье-Луазель [53, 54]; +0,3–0,7% и +1–4% — Керр и Линкольн [57]."),
 14:L([55,56,58],note="В первоисточнике [56] эффект на зарплаты указан в процентных пунктах: «7–8 percentage points». 30–50% роста производительности и половина выигрыша, «съеденная» ростом цен на жильё, — [55], [56]. Бюджетный эффект (547 млрд $ в 2017 году, от −1% до +1% ВВП) — ОЭСР [58]."),
-15:"Выводы сформулированы авторами на основе источников, приведённых к слайдам 2–14.",
 }
