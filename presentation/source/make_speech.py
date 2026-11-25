@@ -6,7 +6,7 @@ import sys
 A, E = "Альбина", "Егор"
 slides = [
 (1,"Высококвалифицированная миграция в современной мировой экономике",A,[
-"Добрый день! Нас зовут Альбина Диникаева и Егор Костицын, мы студенты группы 04.1-408. Тема нашей работы — высококвалифицированная миграция в современной мировой экономике.",
+"Добрый день! Нас зовут Егор Костицын и Альбина Диникаева, мы студенты группы 04.1-408. Тема нашей работы — высококвалифицированная миграция в современной мировой экономике.",
 "Мы рассмотрим, почему государства и компании конкурируют за специалистов, какие инструменты они для этого используют, как распределены международные потоки кадров и какие экономические эффекты даёт такая миграция."]),
 (2,"Понятие высококвалифицированного специалиста",E,[
 "Высококвалифицированный специалист — это работник, который обладает специальными знаниями, сложными навыками и высокой профессиональной подготовкой, необходимыми для сложной трудовой деятельности.",
@@ -14,7 +14,8 @@ slides = [
 "Для анализа миграции важны четыре понятия: утечка мозгов, приток мозгов, циркуляция мозгов, когда специалисты переезжают и возвращаются, и растрата квалификации, когда мигрант работает ниже своего уровня подготовки."]),
 (3,"Эволюция производства и рост спроса на высококвалифицированные кадры",A,[
 "Спрос на таких специалистов связан с тем, как менялось производство. Мы выделяем четыре этапа: фордизм с массовым конвейерным производством, постфордизм с гибким производством, Индустрию 4.0 с цифровизацией и автоматизацией и Индустрию 5.0, которая ставит в центр человека и устойчивость.",
-"Такая последовательность выбрана в связи с тем, что мы сравниваем этапы по одному критерию — какой труд и какая квалификация нужны производству. Фордизму нужен был в основном исполнитель стандартных операций, постфордизму — работник, способный адаптироваться к меняющемуся спросу, Индустрии 4.0 — специалист, который проектирует и контролирует цифровые системы, а Индустрии 5.0 — специалист, который работает вместе с роботами и искусственным интеллектом. Этапы не сменяют друг друга полностью, а накладываются: каждый следующий опирается на возможности предыдущего.",
+"Такая последовательность выбрана в связи с тем, что мы сравниваем этапы по единому критерию — требованиям производства к труду и квалификации работников. Фордизму нужен был в основном исполнитель стандартных операций, постфордизму — работник, способный адаптироваться к меняющемуся спросу, Индустрии 4.0 — специалист, который проектирует и контролирует цифровые системы, а Индустрии 5.0 — специалист, который работает вместе с роботами и искусственным интеллектом.",
+"При этом речь идёт не о строгой хронологии, а о смене доминирующих моделей. Фордизм и постфордизм описывают организацию производства и труда, а Индустрия 4.0 и 5.0 — технологические концепции, поэтому этапы накладываются друг на друга. Индустрия 4.0 развивает гибкость постфордизма цифровыми средствами, а Индустрия 5.0, по определению Европейской комиссии, не заменяет Индустрию 4.0, а дополняет её. На каждом этапе растёт спрос на высококвалифицированные кадры, и это создаёт основу для международной конкуренции за них.",
 "В результате растёт спрос на компетенции в области искусственного интеллекта и анализа данных, инженерии и робототехники, научных исследований. Обеспечить экономику такими кадрами можно двумя путями: готовить собственных специалистов или привлекать иностранных."]),
 (4,"Инструменты привлечения высококвалифицированных специалистов",E,[
 "Инструменты привлечения можно разделить по тому, кто их использует, — государство или компании, и по способу действия — прямые и косвенные.",
@@ -66,18 +67,13 @@ slides = [
 (16,"Спасибо за внимание",E,[
 "Спасибо за внимание! Будем рады ответить на ваши вопросы."]),
 ]
+slides = [(n,t,(E if n%2 else A),x) for n,t,_,x in slides]
 qa_title = "Если спросят: почему цепочка «фордизм — постфордизм — Индустрия 4.0 — Индустрия 5.0»"
 qa = [
 "Краткий ответ. Такая последовательность выбрана в связи с тем, что этапы сравниваются по единому критерию — требованиям производства к труду и квалификации работников. По этому критерию каждая модель продолжает предыдущую: от массового стандартного труда (фордизм) к гибкому и наукоёмкому (постфордизм), затем к цифровому, где человек проектирует и контролирует системы (Индустрия 4.0), и к человекоцентричному, где ценится взаимодействие человека с роботами и искусственным интеллектом (Индустрия 5.0).",
 "Важная оговорка. Фордизм и постфордизм — модели организации производства и труда, а Индустрия 4.0 и 5.0 — технологические и стратегические концепции (Германия, 2011 год; Европейская комиссия, 2021 год). Поэтому это не строгая хронология, а последовательность доминирующих моделей: этапы накладываются друг на друга. Индустрия 4.0 развивает гибкость постфордизма цифровыми средствами, а Индустрия 5.0, по определению Еврокомиссии, не заменяет Индустрию 4.0, а дополняет её принципами устойчивости и человекоцентричности.",
 "Если спросят про Индустрию 3.0. Индустрия 3.0 — автоматизация на основе электроники и компьютеров с 1970-х годов — по времени совпадает с постфордизмом. Постфордизм описывает организационную сторону этого периода, поэтому отдельно Индустрию 3.0 мы не выделяем.",
 ]
-doc = Document()
-for s in doc.sections:
-    s.top_margin = s.bottom_margin = Cm(2); s.left_margin = Cm(2.5); s.right_margin = Cm(1.5)
-st = doc.styles["Normal"]; st.font.name = "Times New Roman"; st.font.size = Pt(14)
-st.element.rPr.rFonts.set(qn("w:eastAsia"), "Times New Roman")
-st.paragraph_format.line_spacing = 1.15; st.paragraph_format.space_after = Pt(6)
 def para(text, bold=False, size=None, align=None, italic=False, color=None, after=None):
     p = doc.add_paragraph(); r = p.add_run(text); r.bold = bold; r.italic = italic
     r.font.name = "Times New Roman"; r._element.rPr.rFonts.set(qn("w:eastAsia"), "Times New Roman")
@@ -86,20 +82,36 @@ def para(text, bold=False, size=None, align=None, italic=False, color=None, afte
     if align is not None: p.alignment = align
     if after is not None: p.paragraph_format.space_after = Pt(after)
     return p
-para("Текст выступления", bold=True, size=16, align=WD_ALIGN_PARAGRAPH.CENTER, after=2)
-para("Высококвалифицированная миграция в современной мировой экономике", size=14, align=WD_ALIGN_PARAGRAPH.CENTER, after=2)
-para("Рассказчики: Альбина Диникаева (нечётные слайды), Егор Костицын (чётные слайды)", italic=True, size=12, align=WD_ALIGN_PARAGRAPH.CENTER, after=14)
-for n, title, who, texts in slides:
-    h = doc.add_paragraph(); h.paragraph_format.space_before = Pt(12); h.paragraph_format.space_after = Pt(2); h.paragraph_format.keep_with_next = True
-    r = h.add_run(f"Слайд {n}. {title}"); r.bold = True; r.font.name = "Times New Roman"; r.font.size = Pt(14)
-    w = para(f"Говорит: {who}", bold=True, size=12, color=RGBColor(0x24,0x34,0x5C), after=4); w.paragraph_format.keep_with_next = True
-    for t in texts:
-        p = para(t); p.paragraph_format.first_line_indent = Cm(1.25); p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
-doc.add_page_break()
-para(qa_title, bold=True, size=14, after=6)
-for t in qa:
-    p = para(t); p.paragraph_format.first_line_indent = Cm(1.25); p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
-doc.save(sys.argv[1])
-words = sum(len(" ".join(t).split()) for *_, t in slides)
-print("words", words, "≈ minutes", round(words/120,1))
-for who in (A,E): print(who, sum(len(" ".join(t).split()) for _,_,w,t in slides if w==who))
+def build(path, only=None):
+    global doc
+    doc = Document()
+    for sec in doc.sections:
+        sec.top_margin = sec.bottom_margin = Cm(2); sec.left_margin = Cm(2.5); sec.right_margin = Cm(1.5)
+    st = doc.styles["Normal"]; st.font.name = "Times New Roman"; st.font.size = Pt(14)
+    st.element.rPr.rFonts.set(qn("w:eastAsia"), "Times New Roman")
+    st.paragraph_format.line_spacing = 1.5 if only else 1.15; st.paragraph_format.space_after = Pt(6)
+    full = {A: "Альбина Диникаева", E: "Егор Костицын"}
+    para("Текст выступления" + (f": {full[only]}" if only else ""), bold=True, size=16, align=WD_ALIGN_PARAGRAPH.CENTER, after=2)
+    para("Высококвалифицированная миграция в современной мировой экономике", size=14, align=WD_ALIGN_PARAGRAPH.CENTER, after=2)
+    if only:
+        mine = [str(n) for n, _, w, _ in slides if w == only]
+        para("Ваши слайды: " + ", ".join(mine), italic=True, size=12, align=WD_ALIGN_PARAGRAPH.CENTER, after=14)
+    else:
+        para("Егор Костицын — нечётные слайды, Альбина Диникаева — чётные слайды", italic=True, size=12, align=WD_ALIGN_PARAGRAPH.CENTER, after=14)
+    for idx, (n, title, who, texts) in enumerate(slides):
+        if only and who != only: continue
+        h = doc.add_paragraph(); h.paragraph_format.space_before = Pt(12); h.paragraph_format.space_after = Pt(2); h.paragraph_format.keep_with_next = True
+        r = h.add_run(f"Слайд {n}. {title}"); r.bold = True; r.font.name = "Times New Roman"; r.font.size = Pt(14)
+        if not only:
+            w = para(f"Говорит: {who}", bold=True, size=12, color=RGBColor(0x24,0x34,0x5C), after=4); w.paragraph_format.keep_with_next = True
+        for t in texts:
+            p = para(t); p.paragraph_format.first_line_indent = Cm(1.25); p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+        if only and idx + 1 < len(slides):
+            nxt = slides[idx + 1]
+            para(f"(дальше слайд {nxt[0]} — говорит {nxt[2]})", italic=True, size=12, color=RGBColor(0x80,0x80,0x80), after=4)
+    doc.save(path)
+out = sys.argv[1]
+build(out + "/Текст_выступления.docx")
+build(out + "/Текст_выступления_Егор.docx", E)
+build(out + "/Текст_выступления_Альбина.docx", A)
+for who in (E, A): print(who, [n for n,_,w,_ in slides if w==who], sum(len(" ".join(t).split()) for _,_,w,t in slides if w==who))
